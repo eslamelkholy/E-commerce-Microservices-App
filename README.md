@@ -14,11 +14,10 @@
 - Test Environment
 - Load Balancing
 
-
 ### TODO List
 
-- 1- Add Test Files To Following TDD Principle
-- 2- RESTful Api With TypeScript Separate Project
-- 3- GraphQL Separate Project
-- 4- GrapQL & TypeScript Separate Project
-- Logging And Montoring Over Cloud
+- Order Service
+- User Service
+- Notification Service
+- Product Service
+- Shipping Service
