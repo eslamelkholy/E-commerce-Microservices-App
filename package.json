@@ -8,6 +8,7 @@
   "main": "index.js",
   "scripts": {
     "test": "nyc --reporter=text --reporter=html mocha ./test",
+    "start": "pm2 start ./pm2.config.js",
     "eslint": "eslint ."
   },
   "dependencies": {

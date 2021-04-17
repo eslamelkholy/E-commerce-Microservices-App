@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  apps: ['products'].map((name) => ({
+  apps: ['products', 'orders'].map((name) => ({
     name,
     cwd: path.resolve(__dirname, `./servers/${name}`),
     script: './index.ts',
