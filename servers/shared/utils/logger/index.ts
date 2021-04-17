@@ -1,4 +1,4 @@
-import config from '../../config/index';
+import config from '../../../products/config/index';
 import ILogger from './abstractions/ILogger';
 import LoggerFactory from './LoggerFactory';
 

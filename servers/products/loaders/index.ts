@@ -1,5 +1,5 @@
 import expressLoader from './express';
-import Logger from '../utils/logger';
+import Logger from '../../shared/utils/logger/index';
 import mongooseLoader from './mongoose';
 
 export default async ({ expressApp }) => {

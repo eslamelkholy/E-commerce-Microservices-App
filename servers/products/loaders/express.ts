@@ -1,10 +1,10 @@
 import { Application } from 'express';
-import Logger from '../utils/logger';
+import Logger from '../../shared/utils/logger/index';
 import routes from '../api';
 import cors from 'cors';
 import config from '../config';
 import expressRequestId from 'express-request-id';
-import requestLogger from '../utils/logger/loggers/RequestLogger';
+import requestLogger from '../../shared/utils/logger/loggers/RequestLogger';
 
 export default ({ app }: { app: Application }) => {
   app.get('/status', (req, res) => {

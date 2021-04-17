@@ -1,7 +1,7 @@
 import httpClient from '../../HttpClient';
 import { Server, LogLevels } from '../constants/server';
 import { HttpMethods } from '../../HttpClient/methods';
-import config from '../../../config/index';
+import config from '../../../../products/config/index';
 import LocalLogger from './LocalLogger';
 
 export default class CloudLogger extends LocalLogger {
