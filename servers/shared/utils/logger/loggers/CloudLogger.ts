@@ -7,7 +7,7 @@ import LocalLogger from './LocalLogger';
 export default class CloudLogger extends LocalLogger {
   error(message: Error, data?: any) {
     this.logger.error(message);
-    this.sendLogToCloud(message, data);
+    // this.sendLogToCloud(message, data);
   }
   async sendLogToCloud(message: Error, data?: any) {
     await httpClient.sendRequest(this.getUrl(), this.getLogsOptions(message, data));
@@ -27,13 +27,10 @@ export default class CloudLogger extends LocalLogger {
           data,
         },
       }),
-      headers: {
-        'X-Parse-Application-Id': config.APP_ID,
-      },
     };
   }
 
   getUrl(): string {
-    return `${config.PARSE_URL}/functions/addLog`;
+    return `localhost:5000/addLog`;
   }
 }
