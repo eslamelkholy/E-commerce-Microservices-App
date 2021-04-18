@@ -33,7 +33,7 @@ export default ({ app }: { app: Application }) => {
   });
   app
     .listen(config.PORT, () => {
-      Logger.log(`🛡️ Product Server listening on port: ${config.PORT} 🛡️`);
+      Logger.log(`🛡️ User Server listening on port: ${config.PORT} 🛡️`);
     })
     .on('error', (err) => {
       Logger.error(err);
