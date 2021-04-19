@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import shopify from './routes/product';
+import shopify from './routes/user';
 
 // guaranteed to get dependencies
 export default () => {

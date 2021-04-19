@@ -5,6 +5,7 @@ import cors from 'cors';
 import config from '../config';
 import expressRequestId from 'express-request-id';
 import requestLogger from '../../shared/utils/logger/loggers/RequestLogger';
+import kafka from 'kafka-node';
 
 export default ({ app }: { app: Application }) => {
   app.get('/status', (req, res) => {
@@ -16,6 +17,23 @@ export default ({ app }: { app: Application }) => {
   app.use(cors());
   app.use(routes());
 
+  var kafka = require('kafka-node'),
+    Consumer = kafka.Consumer,
+    client = new kafka.KafkaClient(),
+    consumer = new Consumer(
+      client,
+      [
+        { topic: 'ecommerce-topic', partitions: 0 },
+        { topic: 'ecommerce-topic2', partitions: 1 },
+      ],
+      {
+        autoCommit: false,
+      }
+    );
+  consumer.on('message', function (message) {
+    console.log('Consumerrrrrrrrr GET Message');
+    console.log(message);
+  });
   /// catch 404 and forward to error handler
   app.use((req, res, next) => {
     const err = new Error('Not Found');

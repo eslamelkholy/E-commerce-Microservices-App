@@ -16,4 +16,5 @@ export default {
 
   DATABASE_URL: process.env.DATABASE_URL,
   SERVER_NAME: process.env.SERVER_NAME,
+  KAFKA_HOST: process.env.KAFKA_HOST,
 } as ProcessEnv;
