@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import KafkaProducer from '../../shared/services/kafka/KafkaProducer';
+import logger from '../../shared/utils/logger';
 import ProductService from '../services/Product';
 
 export const get = async (req: Request, res: Response) => {
@@ -9,11 +10,10 @@ export const get = async (req: Request, res: Response) => {
 };
 
 export const makeOrder = async (req: Request, res: Response) => {
-  const producerMsgs = await KafkaProducer.produce([
-    {
-      messages: 'Hello World From Kafka Producer',
-      topic: 'ecommerce-topic',
-    },
-  ]);
-  return res.status(200).send(producerMsgs);
+  const payloads = [
+    { topic: 'ecommerce-topic', messages: 'New Order Created', partition: 0 },
+    // { topic: 'ecommerce-topic2', messages: ['hello', 'world', km], partition: 1 },
+  ];
+  const result = await KafkaProducer.produce(payloads);
+  return res.status(200).send(result);
 };
