@@ -10,10 +10,7 @@ export const get = async (req: Request, res: Response) => {
 };
 
 export const makeOrder = async (req: Request, res: Response) => {
-  const payloads = [
-    { topic: 'ecommerce-topic', messages: 'New Order Created', partition: 0 },
-    // { topic: 'ecommerce-topic2', messages: ['hello', 'world', km], partition: 1 },
-  ];
+  const payloads = [{ topic: 'ecommerce-topic', messages: 'To Product Consumer', partition: 0 }];
   const result = await KafkaProducer.produce(payloads);
   return res.status(200).send(result);
 };

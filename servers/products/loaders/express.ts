@@ -5,7 +5,7 @@ import cors from 'cors';
 import config from '../config';
 import expressRequestId from 'express-request-id';
 import requestLogger from '../../shared/utils/logger/loggers/RequestLogger';
-import kafka from 'kafka-node';
+import KafkaConsumer from '../../shared/services/kafka/KafkaConsumer';
 
 export default ({ app }: { app: Application }) => {
   app.get('/status', (req, res) => {
@@ -16,24 +16,7 @@ export default ({ app }: { app: Application }) => {
   app.use(requestLogger);
   app.use(cors());
   app.use(routes());
-
-  var kafka = require('kafka-node'),
-    Consumer = kafka.Consumer,
-    client = new kafka.KafkaClient(),
-    consumer = new Consumer(
-      client,
-      [
-        { topic: 'ecommerce-topic', partitions: 0 },
-        { topic: 'ecommerce-topic2', partitions: 1 },
-      ],
-      {
-        autoCommit: false,
-      }
-    );
-  consumer.on('message', function (message) {
-    console.log('Consumerrrrrrrrr GET Message');
-    console.log(message);
-  });
+  KafkaConsumer.consumerInitializer();
   /// catch 404 and forward to error handler
   app.use((req, res, next) => {
     const err = new Error('Not Found');
@@ -51,7 +34,7 @@ export default ({ app }: { app: Application }) => {
   });
   app
     .listen(config.PORT, () => {
-      Logger.log(`🛡️ Product Server listening on port: ${config.PORT} 🛡️`);
+      Logger.log(`🛡️  Server listening on port: ${config.PORT} 🛡️`);
     })
     .on('error', (err) => {
       Logger.error(err);
