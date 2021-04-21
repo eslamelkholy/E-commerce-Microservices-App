@@ -12,6 +12,7 @@ services:
       dockerfile: ./docker/nginx.${APP_ENV}.dockerfile
     depends_on:
       - user
+      - product
     ports:
       - '80:80'
       - '443:443'
@@ -30,8 +31,6 @@ services:
     working_dir: /var/www/boilerplate
     env_file:
       - ./docker/env/app.${APP_ENV}.env
-    depends_on:
-      - 'product'
     networks:
       - node-boilerplate-network
 
