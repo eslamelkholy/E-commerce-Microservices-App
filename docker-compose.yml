@@ -25,7 +25,7 @@ services:
       context: .
       dockerfile: ./docker/user.node.${APP_ENV}.dockerfile
     ports:
-      - '8000:8000'
+      - '8010:8010'
     volumes:
       - .:/var/www/boilerplate
     working_dir: /var/www/boilerplate
@@ -40,7 +40,7 @@ services:
       context: .
       dockerfile: ./docker/product.node.${APP_ENV}.dockerfile
     ports:
-      - '8010:8010'
+      - '8000:8000'
     volumes:
       - .:/var/www/boilerplate
     working_dir: /var/www/boilerplate

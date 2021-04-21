@@ -10,7 +10,7 @@ RUN yarn install
 
 RUN mkdir -p /var/log/pm2
 
-EXPOSE 8000
+EXPOSE 8010
 
 ENTRYPOINT ["/bin/bash", "./docker/scripts/user.sh"]
 

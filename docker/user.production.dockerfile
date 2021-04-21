@@ -8,7 +8,7 @@ COPY ./package.json .
 COPY ./package-lock.json .
 
 ENV NODE_ENV production
-ENV PORT=8000
+ENV PORT=8010
 
 RUN npm install -g pm2@latest
 RUN yarn install
