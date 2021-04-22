@@ -16,7 +16,7 @@ export default ({ app }: { app: Application }) => {
   app.use(requestLogger);
   app.use(cors());
   app.use(routes());
-  // KafkaConsumer.consumerInitializer();
+  KafkaConsumer.consumerInitializer();
   /// catch 404 and forward to error handler
   app.use((req, res, next) => {
     const err = new Error('Not Found');

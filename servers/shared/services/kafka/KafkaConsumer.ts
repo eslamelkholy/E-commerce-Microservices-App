@@ -5,13 +5,9 @@ import logger from '../../utils/logger';
 class KafkaConsumer {
   private consumer: Consumer;
   constructor() {
-    this.consumer = new Consumer(
-      new KafkaClient({ kafkaHost: config.KAFKA_HOST }),
-      [{ topic: 'ecommerce-topic' }, { topic: 'ecommerce-topic2' }],
-      {
-        autoCommit: false,
-      }
-    );
+    this.consumer = new Consumer(new KafkaClient({ kafkaHost: config.KAFKA_HOST }), [{ topic: 'ecommerce-topic' }], {
+      autoCommit: false,
+    });
   }
 
   consumerInitializer(): void {
