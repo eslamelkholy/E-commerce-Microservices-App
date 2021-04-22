@@ -61,15 +61,14 @@ services:
 
   kafka:
     container_name: Kafka-Service
-    image: 'wurstmeister/kafka:latest'
+    build:
+      context: .
+      dockerfile: ./docker/kafka.dockerfile
     ports:
       - '9092:9092'
     hostname: kafka
-    environment:
-      - KAFKA_ADVERTISED_HOST_NAME=kafka
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
-      - KAFKA_ADVERTISED_PORT=9092
-      - KAFKA_CREATE_TOPICS=ecommerce-topic:1:1
+    env_file:
+      - ./docker/env/kafka.env
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:

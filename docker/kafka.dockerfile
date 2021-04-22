@@ -1,7 +1,6 @@
 FROM wurstmeister/kafka:latest
 
 LABEL author="Eslam Elkholy"
-
 WORKDIR /var/www/boilerplate
 
 
