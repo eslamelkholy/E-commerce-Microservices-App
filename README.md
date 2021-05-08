@@ -21,3 +21,7 @@
 - Notification Service
 - Product Service
 - Shipping Service
+
+### Quick Start
+
+- Adjust Enviroment Variable For APP_ENV And HOST_NAME Default (Development, localhost)
