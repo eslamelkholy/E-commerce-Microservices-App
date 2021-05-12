@@ -9,7 +9,7 @@ import KafkaConsumer from '../../shared/services/kafka/KafkaConsumer';
 
 export default ({ app }: { app: Application }) => {
   app.get('/status', (req, res) => {
-    res.status(200).send('It Works Fine');
+    res.status(200).send('[Product-Server] Works Fine');
   });
 
   app.use(expressRequestId());
