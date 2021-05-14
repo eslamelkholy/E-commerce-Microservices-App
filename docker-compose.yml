@@ -30,6 +30,8 @@ services:
       - .:/var/www/boilerplate
     env_file:
       - ./docker/env/app.${APP_ENV}.env
+    depends_on:
+      - kafka
     networks:
       - node-boilerplate-network
 
@@ -44,6 +46,31 @@ services:
       - .:/var/www/boilerplate
     env_file:
       - ./docker/env/app.${APP_ENV}.env
+    depends_on:
+      - kafka
+    networks:
+      - node-boilerplate-network
+
+  zookeeper:
+    container_name: Zookeeper-Service
+    image: wurstmeister/zookeeper
+    ports:
+      - '2181:2181'
+    networks:
+      - node-boilerplate-network
+
+  kafka:
+    container_name: Kafka-Service
+    build:
+      context: .
+      dockerfile: ./docker/kafka.dockerfile
+    ports:
+      - '9092:9092'
+    hostname: ${HOST_NAME}
+    env_file:
+      - ./docker/env/kafka.env
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - node-boilerplate-network
 
