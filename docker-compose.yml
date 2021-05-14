@@ -67,7 +67,7 @@ services:
     ports:
       - '9092:9092'
     env_file:
-      - ./docker/env/kafka.env
+      - ./docker/env/kafka.${APP_ENV}.env
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
