@@ -63,7 +63,7 @@ services:
     container_name: Kafka-Service
     build:
       context: .
-      dockerfile: ./docker/kafka.dockerfile
+      dockerfile: ./docker/kafka.${APP_ENV}.dockerfile
     ports:
       - '9092:9092'
     hostname: ${HOST_NAME}
