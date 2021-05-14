@@ -15,6 +15,7 @@ class KafkaProducer {
 
   sendMessage(payloads: Array<ProduceRequest>): Promise<string> {
     return new Promise((resolve, reject) => {
+      logger.log(`Start Producing Message to Kafka at Host = ${config.KAFKA_HOST}`);
       this.producer = new Producer(new KafkaClient({ kafkaHost: config.KAFKA_HOST }));
       this.producer.on('ready', () =>
         this.producer.send(payloads, (error, data) => (error ? reject(error) : resolve(data)))

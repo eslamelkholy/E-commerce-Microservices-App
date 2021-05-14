@@ -11,7 +11,7 @@ class KafkaConsumer {
   }
 
   consumerInitializer(): void {
-    console.log(`Starting Consumer Within Kafka Host ${config.KAFKA_HOST}`);
+    logger.log(`Starting Consumer Within Kafka Host ${config.KAFKA_HOST}`);
     this.consumer.on('message', ({ value, topic, partition }) => {
       // DO Something
       logger.log(`${config.SERVER_NAME} Received New Message = ${value}`);
