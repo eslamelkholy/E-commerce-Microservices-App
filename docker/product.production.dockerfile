@@ -1,22 +1,22 @@
-FROM node:alpine
+FROM node:latest
 
 LABEL author="Eslam Elkholy"
 
 WORKDIR /var/www/boilerplate
 
-COPY ./package.json .
-COPY ./package-lock.json .
-
-ENV NODE_ENV production
-ENV PORT=8000
-
 RUN npm install -g pm2@latest
+RUN pm2 install typescript
 RUN yarn install
-
-COPY    . .
 
 RUN mkdir -p /var/log/pm2
 
-EXPOSE 		$PORT
+EXPOSE 8000
 
-ENTRYPOINT ["/bin/bash", "./docker/scripts/node.sh"]
+ENTRYPOINT ["/bin/bash", "./docker/scripts/product.sh"]
+
+
+# To build:
+# docker build -f node.development.dockerfile --tag boilerplatetest ../
+
+# To run:
+# docker run -p 4000:4000 boilerplatetest
