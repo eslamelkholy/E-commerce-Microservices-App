@@ -1,0 +1,16 @@
+pipeline {
+  stages {
+      stage('CI Stage') {
+          steps {
+              sh './jenkins/scripts/test.sh'
+          }
+      }
+      stage('CD Stage') { 
+          steps {
+              echo 'Start Deploy Services'
+              sh './jenkins/scripts/deploy.sh' 
+          }
+      }
+  }
+}
+

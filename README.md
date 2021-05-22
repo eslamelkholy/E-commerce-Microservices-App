@@ -16,11 +16,8 @@
 
 ### TODO List
 
-- Order Service
-- User Service
-- Notification Service
-- Product Service
-- Shipping Service
+- Separate node_modules to every project
+- Separate Jenkins to Every Microservice
 
 ### Quick Start
 
