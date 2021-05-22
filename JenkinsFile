@@ -1,11 +1,11 @@
 pipeline {
   stages {
-      stage('CI Stage') {
+      stage('Test') {
           steps {
               sh './jenkins/scripts/test.sh'
           }
       }
-      stage('CD Stage') { 
+      stage('Deploy') { 
           steps {
               echo 'Start Deploy Services'
               sh './jenkins/scripts/deploy.sh' 
