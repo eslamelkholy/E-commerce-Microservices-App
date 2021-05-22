@@ -7,9 +7,10 @@
   "description": "Microservice Architecture",
   "main": "index.js",
   "scripts": {
-    "test": "nyc --reporter=text --reporter=html mocha ./test",
+    "test": "mocha ./test",
     "start": "pm2 start ./config/pm2.all.config.js",
-    "eslint": "eslint ."
+    "eslint": "eslint .",
+    "test-report": "nyc --reporter=text --reporter=html mocha ./test"
   },
   "dependencies": {
     "cors": "^2.8.5",
