@@ -8,7 +8,7 @@ import requestLogger from '../../shared/utils/logger/loggers/RequestLogger';
 import KafkaConsumer from '../../shared/services/kafka/KafkaConsumer';
 
 export default ({ app }: { app: Application }) => {
-  app.get('/status', (req, res) => res.status(200).send('[Product-Server] Fully Pipeline Works Now yaaaay'));
+  app.get('/status', (req, res) => res.status(200).send('[Product-Server] Fully Pipeline Works Now yaaaay 🚀🚀🔥🔥'));
 
   app.use(expressRequestId());
   app.use(requestLogger);
@@ -31,9 +31,7 @@ export default ({ app }: { app: Application }) => {
     });
   });
   app
-    .listen(config.PORT, () => {
-      Logger.log(`🛡️  Server listening on port: ${config.PORT} 🛡️`);
-    })
+    .listen(config.PORT, () => Logger.log(`🛡️  Server listening on port: ${config.PORT} 🛡️`))
     .on('error', (err) => {
       Logger.error(err);
       process.exit(1);
