@@ -11,7 +11,6 @@ services:
       context: .
       dockerfile: ./docker/nginx.${APP_ENV}.dockerfile
     depends_on:
-      - user
       - product
     ports:
       - '80:80'
@@ -19,21 +18,36 @@ services:
     networks:
       - node-boilerplate-network
 
-  user:
-    container_name: User-Service
+  auth:
+    container_name: Auth-Service
     build:
       context: .
-      dockerfile: ./docker/user.node.${APP_ENV}.dockerfile
+      dockerfile: ./docker/auth.node.${APP_ENV}.dockerfile
     ports:
-      - '8010:8010'
+      - '3000:3000'
     volumes:
       - .:/var/www/boilerplate
-    env_file:
-      - ./docker/env/app.${APP_ENV}.env
     depends_on:
-      - kafka
+      - auth-db
     networks:
-      - node-boilerplate-network
+      node-boilerplate-network:
+        ipv4_address: 172.28.0.12
+        aliases:
+          - auth.local
+  auth-db:
+    container_name: auth-db
+    build:
+      context: .
+      dockerfile: docker/mongo.dockerfile
+    ports:
+      - '27017:27017'
+    env_file:
+      - ./docker/env/mongo.${APP_ENV}.env
+    networks:
+      node-boilerplate-network:
+        ipv4_address: 172.28.0.13
+        aliases:
+          - auth-db.local
 
   product:
     container_name: Product-Service
@@ -47,35 +61,62 @@ services:
     env_file:
       - ./docker/env/app.${APP_ENV}.env
     depends_on:
-      - kafka
+      - productdb
+    #   - kafka
     networks:
-      - node-boilerplate-network
+      node-boilerplate-network:
+        ipv4_address: 172.28.0.10
+        aliases:
+          - product.local
 
-  zookeeper:
-    container_name: Zookeeper-Service
-    image: wurstmeister/zookeeper
-    ports:
-      - '2181:2181'
-    networks:
-      - node-boilerplate-network
+  # zookeeper:
+  #   container_name: Zookeeper-Service
+  #   image: wurstmeister/zookeeper
+  #   ports:
+  #     - '2181:2181'
+  #   networks:
+  #     - node-boilerplate-network
 
-  kafka:
-    container_name: Kafka-Service
-    build:
-      context: .
-      dockerfile: ./docker/kafka.${APP_ENV}.dockerfile
-    ports:
-      - '9092:9092'
-    env_file:
-      - ./docker/env/kafka.${APP_ENV}.env
+  # kafka:
+  #   container_name: Kafka-Service
+  #   build:
+  #     context: .
+  #     dockerfile: ./docker/kafka.${APP_ENV}.dockerfile
+  #   depends_on:
+  #     - zookeeper
+  #   ports:
+  #     - '9092:9092'
+  #   env_file:
+  #     - ./docker/env/kafka.${APP_ENV}.env
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   networks:
+  #     - node-boilerplate-network
+
+  productdb:
+    container_name: productdb
+    restart: always
+    image: mysql:latest
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - 'mysql:/var/lib/mysql'
+      - './config/mysql/sql.cnf:/etc/mysql/conf.d/sql.cnf'
+    ports:
+      - '3366:3306'
+    env_file:
+      - ./docker/env/productdb.${APP_ENV}.env
     networks:
-      - node-boilerplate-network
+      node-boilerplate-network:
+        ipv4_address: 172.28.0.11
+        aliases:
+          - productdb.local
 
 volumes:
   pgdata:
+  mysql:
 
 networks:
   node-boilerplate-network:
-    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.0.0/16

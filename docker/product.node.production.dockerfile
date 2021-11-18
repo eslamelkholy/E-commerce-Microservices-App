@@ -4,9 +4,11 @@ LABEL author="Eslam Elkholy"
 
 WORKDIR /var/www/boilerplate
 
-RUN npm install -g pm2@latest
-RUN pm2 install typescript
-RUN yarn install
+COPY servers/products/package.json .
+
+RUN npm install --only=prod
+
+RUN npm install -g pm2 ts-node
 
 RUN mkdir -p /var/log/pm2
 

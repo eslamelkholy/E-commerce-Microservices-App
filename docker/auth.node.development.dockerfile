@@ -4,7 +4,7 @@ LABEL author="Eslam Elkholy"
 
 WORKDIR /var/www/boilerplate
 
-COPY servers/products/package.json .
+COPY servers/auth/package.json .
 
 RUN npm install --only=prod
 
@@ -14,7 +14,7 @@ RUN mkdir -p /var/log/pm2
 
 EXPOSE 8000
 
-ENTRYPOINT ["/bin/bash", "./docker/scripts/product.sh"]
+ENTRYPOINT ["/bin/bash", "./docker/scripts/auth.sh"]
 
 
 # To build:

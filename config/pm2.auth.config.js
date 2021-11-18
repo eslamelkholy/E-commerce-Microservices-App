@@ -1,10 +1,10 @@
 const path = require('path');
 
 module.exports = {
-  apps: ['products'].map((name) => ({
+  apps: ['auth'].map((name) => ({
     name,
     cwd: path.resolve(__dirname, `../servers/${name}`),
-    script: 'ts-node -T ./index.ts',
+    script: 'ts-node -T ./src/index.ts',
     watch: ['.', '../shared', '../../node_modules'],
     instance_var: 'INSTANCE_ID',
     env: {

@@ -1,7 +1,7 @@
 import express from 'express';
-import loaders from './loaders';
+import loaders from './src//loaders';
 
 (async () => {
   const app = express();
-  await loaders({ expressApp: app });
+  await loaders(app);
 })();
