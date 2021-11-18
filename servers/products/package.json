@@ -13,7 +13,7 @@
     "test-report": "nyc --reporter=text --reporter=html mocha ./test"
   },
   "dependencies": {
-    "@common-kitchen/common": "^1.0.7",
+    "@common-kitchen/common": "^1.0.9",
     "@types/cors": "^2.8.12",
     "@types/express-request-id": "^1.4.3",
     "cors": "^2.8.5",

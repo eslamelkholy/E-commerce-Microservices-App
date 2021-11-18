@@ -1,13 +1,11 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import { body } from 'express-validator';
-import jwt from 'jsonwebtoken';
-import { validateRequest, BadRequestError } from '@common-kitchen/common';
+import { validateRequest } from '@common-kitchen/common';
 
-import { Password } from '../services/password';
-import { User } from '../models/user';
-import { UserDto } from '../dto/UserDto';
+import { AuthController } from '../controller/auth';
 
 const router = express.Router();
+const authController = new AuthController();
 
 router.post(
   '/api/users/signin',
@@ -16,30 +14,7 @@ router.post(
     body('password').trim().notEmpty().withMessage('You must supply a password'),
   ],
   validateRequest,
-  async (req: Request, res: Response) => {
-    const { email, password } = req.body;
-
-    const existingUser = await User.findOne({ email });
-    if (!existingUser) {
-      throw new BadRequestError('Invalid credentials');
-    }
-
-    const passwordsMatch = await Password.compare(existingUser.password, password);
-    if (!passwordsMatch) {
-      throw new BadRequestError('Invalid Credentials');
-    }
-
-    // Generate JWT
-    const userJwt = jwt.sign(
-      {
-        id: existingUser.id,
-        email: existingUser.email,
-      },
-      process.env.JWT_KEY!
-    );
-
-    res.status(200).send({ ...new UserDto(existingUser), jwt: userJwt });
-  }
+  authController.signin
 );
 
 export { router as signinRouter };
