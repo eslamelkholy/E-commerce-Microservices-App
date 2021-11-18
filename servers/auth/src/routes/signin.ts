@@ -1,10 +1,11 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 import jwt from 'jsonwebtoken';
-import { validateRequest, BadRequestError } from '@cygnetops/common';
+import { validateRequest, BadRequestError } from '@common-kitchen/common';
 
 import { Password } from '../services/password';
 import { User } from '../models/user';
+import { UserDto } from '../dto/UserDto';
 
 const router = express.Router();
 
@@ -37,12 +38,7 @@ router.post(
       process.env.JWT_KEY!
     );
 
-    // Store it on session object
-    req.session = {
-      jwt: userJwt,
-    };
-
-    res.status(200).send(existingUser);
+    res.status(200).send({ ...new UserDto(existingUser), jwt: userJwt });
   }
 );
 

@@ -17,9 +17,10 @@ interface UserModel extends mongoose.Model<UserDoc> {
 
 // An interface that describes the properties
 // that a User Document has
-interface UserDoc extends mongoose.Document {
+export interface UserDoc extends mongoose.Document {
   email: string;
   password: string;
+  id?: mongoose.ObjectId;
 }
 
 const userSchema = new mongoose.Schema(

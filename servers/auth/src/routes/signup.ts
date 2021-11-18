@@ -1,9 +1,10 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 import jwt from 'jsonwebtoken';
-import { validateRequest, BadRequestError } from '@cygnetops/common';
+import { validateRequest, BadRequestError } from '@common-kitchen/common';
 
 import { User } from '../models/user';
+import { UserDto } from '../dto/UserDto';
 
 const router = express.Router();
 
@@ -43,7 +44,7 @@ router.post(
       jwt: userJwt,
     };
 
-    res.status(201).send(user);
+    res.status(201).send({ ...new UserDto(user), jwt: userJwt });
   }
 );
 
