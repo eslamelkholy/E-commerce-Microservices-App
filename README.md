@@ -1,4 +1,4 @@
-# Khazna E-commerce Task
+# E-commerce App
 
 ### Quick Start
 
