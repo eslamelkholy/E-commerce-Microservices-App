@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
+import { Category } from '../entity/Category';
 import { Product } from '../entity/Product';
 
 export const dbConnect = async () => {
@@ -11,7 +12,7 @@ export const dbConnect = async () => {
       username: 'root',
       password: 'products',
       database: 'products',
-      entities: [Product],
+      entities: [Product, Category],
       synchronize: true,
       logging: false,
     });

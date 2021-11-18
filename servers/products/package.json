@@ -10,7 +10,8 @@
     "test": "mocha ./test",
     "start": "pm2 start ./config/pm2.all.config.js",
     "eslint": "eslint .",
-    "test-report": "nyc --reporter=text --reporter=html mocha ./test"
+    "test-report": "nyc --reporter=text --reporter=html mocha ./test",
+    "dev": "ts-node index.ts"
   },
   "dependencies": {
     "@common-kitchen/common": "^1.0.9",

@@ -2,15 +2,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Category } from './Category';
+import { Product } from './Product';
 
 @Entity()
-export class Product {
+export class Category {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -20,18 +19,14 @@ export class Product {
   @Column({ type: 'text', nullable: true })
   description: string;
 
-  @Column({ type: 'integer' })
-  price: string;
-
   @Column({ name: 'image_url', type: 'varchar', length: 255, nullable: true })
   imageUrl: string;
 
-  @ManyToOne(() => Category, (category) => category.products)
-  @JoinColumn({ name: 'category_id' })
-  category: Category;
+  @OneToMany(() => Product, (product) => product.category)
+  products: Product[];
 
-  @Column({ type: 'varchar', length: 255 })
-  status: string;
+  @Column({ type: 'tinyint', unsigned: true, default: 1 })
+  active: number;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: 'string';
