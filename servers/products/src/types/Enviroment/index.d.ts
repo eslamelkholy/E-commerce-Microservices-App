@@ -5,4 +5,5 @@ export interface ProcessEnv {
   IN_PROD: string;
   DATABASE_URL: string;
   SERVER_NAME: string;
+  KAFKA_HOST: string;
 }
