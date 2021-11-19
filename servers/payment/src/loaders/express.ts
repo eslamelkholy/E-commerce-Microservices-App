@@ -5,7 +5,8 @@ import cors from 'cors';
 import { config } from '../config';
 import expressRequestId from 'express-request-id';
 import { AppLogger, errorHandler, NotFoundError, requestLogger } from '@common-kitchen/common';
-// import KafkaConsumer from '../../shared/services/kafka/KafkaConsumer';
+import { reqisteredUserConsumer } from '../services/Kafka/RegisteredUserConsumer';
+import { requestPurchaseConsumer } from '../services/Kafka/RequestPurchaseConsumer';
 
 export default (app: Application) => {
   app.use(cors());
@@ -18,7 +19,8 @@ export default (app: Application) => {
   app.use(requestLogger);
   app.use('/api/v1', routes());
 
-  // KafkaConsumer.consumerInitializer();
+  requestPurchaseConsumer.consumerInitializer();
+  reqisteredUserConsumer.consumerInitializer();
   /// catch 404 and forward to error handler
   app.all('*', async (req, res) => {
     throw new NotFoundError();

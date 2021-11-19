@@ -4,11 +4,14 @@ import { BadRequestError } from '@common-kitchen/common';
 import { Password } from '../services/password';
 import { UserDto } from '../dto/UserDto';
 import { JwtService } from './Token/JwtService';
+import { RegisterEvent } from './Kafka/Events/RegisterEvent';
 
 export class AuthService {
   public authRepository: AuthRepository;
+  public registerEvent: RegisterEvent;
   constructor() {
     this.authRepository = new AuthRepository();
+    this.registerEvent = new RegisterEvent();
   }
 
   async signin(email: string, password: string) {
@@ -24,6 +27,7 @@ export class AuthService {
     }
 
     const userJwt = JwtService.generateToken(existingUser);
+
     return new UserDto(existingUser, userJwt);
   }
 
@@ -37,6 +41,9 @@ export class AuthService {
     const user = await this.authRepository.createUser(email, password);
 
     const userJwt = JwtService.generateToken(user);
+
+    this.registerEvent.produce(user);
+
     return new UserDto(user, userJwt);
   }
 

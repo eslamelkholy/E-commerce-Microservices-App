@@ -11,6 +11,7 @@ export APP_ENV=development
 <!--ts-->
 
 - [Wallet Service](#wallet-service)
+- [Kafka Service](#kafka-service)
 <!--te-->
 
 # Payment Service
@@ -31,3 +32,7 @@ Separate Payment Service Logic to Have The Following
 
 - **Wallet Service** will have User Data and it's Wallet
 - **Payment Service** will Handle Transaction Process Only
+
+# Kafka Service
+
+have Standalone kafka Service handle Messages Over Our Microservice

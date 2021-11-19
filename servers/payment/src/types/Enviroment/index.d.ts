@@ -12,4 +12,5 @@ export interface ProcessEnv {
   DB_USERNAME: string;
   DB_PASSWORD: string;
   DB_NAME: string;
+  KAFKA_HOST: string;
 }
