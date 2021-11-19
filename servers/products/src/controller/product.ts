@@ -8,8 +8,10 @@ export class ProductController {
     this.productService = new ProductService();
   }
 
-  get = async (_: Request, res: Response) => {
-    const products = await this.productService.getAll();
+  get = async (req: Request, res: Response) => {
+    const maxAllowedLimit = req.currentUser?.maxAllowedLimit;
+
+    const products = await this.productService.getAll(maxAllowedLimit!);
 
     return res.status(200).send(new AppResponse(200, products));
   };

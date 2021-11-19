@@ -1,4 +1,4 @@
-import { validateRequest } from '@common-kitchen/common';
+import { requireAuthV2, validateRequest } from '@common-kitchen/common';
 import { Router } from 'express';
 import { body } from 'express-validator';
 import { ProductController } from '../../../controller/product';
@@ -8,7 +8,7 @@ export const productRoute = (app: Router): void => {
   const productController = new ProductController();
   app.use('/products', route);
 
-  route.get('/', productController.get);
+  route.get('/', requireAuthV2, productController.get);
   route.post(
     '/',
     [

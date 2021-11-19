@@ -32,6 +32,7 @@ Kafka Instance
 - User Registered Event & Create New Wallet
 - Request Product Logic >> Populate to Payment Service
 - Cancel Purchase Event Logic
+- Get Product Less than or Equal User Allowed Limit
 - Query Service to Query all User Orders
 - Database SEED With Migration
 - Pagination Package

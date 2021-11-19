@@ -1,4 +1,4 @@
-import { getRepository, Repository } from 'typeorm';
+import { getRepository, LessThanOrEqual, Repository } from 'typeorm';
 import { Product } from '../entity/Product';
 export class ProductRepository {
   private repository: Repository<Product>;
@@ -7,8 +7,12 @@ export class ProductRepository {
     this.repository = getRepository(Product);
   }
 
-  findAll() {
-    return this.repository.find();
+  findAll(maxAllowedLimit: number) {
+    return this.repository.find({
+      where: {
+        price: LessThanOrEqual(maxAllowedLimit),
+      },
+    });
   }
 
   find(productId: number) {

@@ -11,8 +11,8 @@ export class ProductService {
     this.productRepository = new ProductRepository();
     this.categoryRepository = new CategoryRepository();
   }
-  async getAll() {
-    return await this.productRepository.findAll();
+  async getAll(maxAllowedLimit: number) {
+    return await this.productRepository.findAll(maxAllowedLimit);
   }
 
   async create(categoryId: number, product: Product) {
