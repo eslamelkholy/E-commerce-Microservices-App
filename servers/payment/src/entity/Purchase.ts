@@ -7,10 +7,9 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Category } from './Category';
 
 @Entity()
-export class Product {
+export class Purchase {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -25,10 +24,6 @@ export class Product {
 
   @Column({ name: 'image_url', type: 'varchar', length: 255, nullable: true })
   imageUrl: string;
-
-  @ManyToOne(() => Category, (category) => category.products)
-  @JoinColumn({ name: 'category_id' })
-  category: Category;
 
   @Column({ type: 'varchar', length: 255 })
   status: string;

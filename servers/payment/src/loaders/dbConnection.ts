@@ -1,8 +1,8 @@
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 import { config } from '../config';
-import { Category } from '../entity/Category';
-import { Product } from '../entity/Product';
+import { Purchase } from '../entity/Purchase';
+import { Wallet } from '../entity/Wallet';
 
 export const dbConnect = async () => {
   console.log(config.DB_HOST);
@@ -14,7 +14,7 @@ export const dbConnect = async () => {
       username: config.DB_USERNAME,
       password: config.DB_PASSWORD,
       database: config.DB_NAME,
-      entities: [Product, Category],
+      entities: [Purchase, Wallet],
       synchronize: true,
       logging: false,
     });

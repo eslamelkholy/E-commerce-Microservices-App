@@ -1,14 +1,13 @@
 import { validateRequest } from '@common-kitchen/common';
 import { Router } from 'express';
 import { body } from 'express-validator';
-import { ProductController } from '../../../controller/product';
+import { PurchaseController } from '../../../controller/PurchaseController';
 const route = Router();
 
-export const productRoute = (app: Router): void => {
-  const productController = new ProductController();
-  app.use('/products', route);
+export const purchaseRoute = (app: Router): void => {
+  const purchaseController = new PurchaseController();
+  app.use('/purchase', route);
 
-  route.get('/', productController.get);
   route.post(
     '/',
     [
@@ -22,6 +21,6 @@ export const productRoute = (app: Router): void => {
       body('categoryId').isInt().withMessage('categoryId Must be Valid Integer'),
     ],
     validateRequest,
-    productController.post
+    purchaseController.post
   );
 };

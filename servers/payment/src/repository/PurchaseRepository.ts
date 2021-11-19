@@ -1,10 +1,10 @@
 import { getRepository, Repository } from 'typeorm';
-import { Product } from '../entity/Product';
-export class ProductRepository {
-  private repository: Repository<Product>;
+import { Purchase } from '../entity/Purchase';
+export class PurchaseRepository {
+  private repository: Repository<Purchase>;
 
   constructor() {
-    this.repository = getRepository(Product);
+    this.repository = getRepository(Purchase);
   }
 
   findAll() {
@@ -19,7 +19,7 @@ export class ProductRepository {
     return this.repository.find({ where: { category: categoryId } });
   }
 
-  create(product: Product) {
+  create(product: Purchase) {
     const productRecord = this.repository.create(product);
     return this.repository.save(productRecord);
   }
