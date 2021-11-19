@@ -19,7 +19,6 @@ class ReqisteredUserConsumer {
   consumerInitializer(): void {
     AppLogger.log(`Starting [ReqisteredUserConsumer] Consumer Within Kafka Host ${config.KAFKA_HOST}`);
     this.consumer.on('message', ({ value, topic, partition }) => {
-      // DO Something
       AppLogger.log(`$Over Topic = ${topic} Received New Message = ${value} `);
 
       const walletService = new WalletService();

@@ -16,6 +16,12 @@ export class Purchase {
   @Column({ type: 'varchar', length: 255 })
   name: string;
 
+  @Column({ type: 'integer' })
+  productId: number;
+
+  @Column({ type: 'varchar', length: 255 })
+  userId: string;
+
   @Column({ type: 'text', nullable: true })
   description: string;
 

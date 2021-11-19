@@ -17,7 +17,7 @@ export class PurchaseService {
       throw new BadRequestError('Sorry Product Not Found');
     }
 
-    this.requestPurchaseProducer.produce({ ...product, userId });
+    this.requestPurchaseProducer.produce({ ...product, productId: product.id, userId });
 
     return { message: 'Purchased Request Has Been Made Successfully' };
   }

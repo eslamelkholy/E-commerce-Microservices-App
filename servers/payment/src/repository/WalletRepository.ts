@@ -12,7 +12,7 @@ export class WalletRepository {
     return this.repository.find();
   }
 
-  find(userId: number) {
+  find(userId: string) {
     return this.repository.findOne({ where: { userId } });
   }
 

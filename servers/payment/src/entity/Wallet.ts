@@ -9,7 +9,7 @@ export class Wallet {
   userId: string;
 
   @Column({ type: 'integer', default: 0 })
-  balance: string;
+  balance: number;
 
   @Column({ type: 'varchar', length: 255 })
   email: string;
