@@ -35,8 +35,8 @@ export class Purchase {
   status: string;
 
   @CreateDateColumn({ name: 'created_at' })
-  createdAt: 'string';
+  createdAt: Date;
 
   @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: 'string';
+  updatedAt: Date;
 }

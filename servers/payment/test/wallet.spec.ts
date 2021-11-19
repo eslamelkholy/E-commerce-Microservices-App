@@ -25,6 +25,15 @@ describe('Wallet Service Test', () => {
     sinon.restore();
   });
 
+  describe('WalletService - getAll Functionality', () => {
+    it('Returns all Purchase', async () => {
+      sinon.stub(walletRepository, 'findAll').resolves(walletMock);
+
+      const expected = await walletService.getAll();
+
+      expect(expected).to.equal(walletMock);
+    });
+  });
   describe('WalletService - Create Functionality', () => {
     it('Throws Error If Wallet Already Exists', async () => {
       sinon.stub(walletRepository, 'find').resolves(walletMock[0]);

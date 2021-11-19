@@ -23,7 +23,7 @@ export class PurchaseService {
     }
 
     let status = PurchaseStatus.INPROGRESS;
-    const reducedBalance = userWallet.balance - requestPurchase.price;
+    const reducedBalance = this.reducedBalanceCalculate(userWallet.balance, requestPurchase.price);
 
     if (reducedBalance < 0) {
       status = PurchaseStatus.FAILED;
@@ -76,5 +76,9 @@ export class PurchaseService {
 
   calculateBalanceAfterCancel(oldBalance: number, price: number): number {
     return oldBalance + price;
+  }
+
+  reducedBalanceCalculate(walletBalance: number, purchaseBalance: number): number {
+    return walletBalance - purchaseBalance;
   }
 }
