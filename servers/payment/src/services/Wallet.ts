@@ -1,6 +1,7 @@
 import { BadRequestError } from '@common-kitchen/common';
 import { Wallet } from '../entity/Wallet';
 import { WalletRepository } from '../repository/WalletRepository';
+import { WalletDto } from '../types/WalletDto';
 
 export class WalletService {
   public walletRepository: WalletRepository;
@@ -12,17 +13,17 @@ export class WalletService {
     return await this.walletRepository.findAll();
   }
 
-  async create(userId: number, walletData: any) {
-    const wallet = await this.walletRepository.find(userId);
+  async create(walletData: any) {
+    const wallet = await this.walletRepository.find(walletData.id);
     if (wallet) {
       throw new BadRequestError('This User Already Have wallet');
     }
-    walletData.userId = walletData.id;
+    const userId = walletData.id;
     delete walletData.id;
-    delete walletData.balance;
 
     const walletRecord = await this.walletRepository.create({
       ...walletData,
+      userId,
     });
 
     return walletRecord;
