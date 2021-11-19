@@ -21,7 +21,7 @@ export class Product {
   description: string;
 
   @Column({ type: 'integer' })
-  price: string;
+  price: number;
 
   @Column({ name: 'image_url', type: 'varchar', length: 255, nullable: true })
   imageUrl: string;
@@ -34,8 +34,8 @@ export class Product {
   status: string;
 
   @CreateDateColumn({ name: 'created_at' })
-  createdAt: 'string';
+  createdAt: Date;
 
   @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: 'string';
+  updatedAt: Date;
 }
