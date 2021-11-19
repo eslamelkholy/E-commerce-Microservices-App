@@ -122,29 +122,29 @@ services:
         aliases:
           - paymentdb.local
 
-  # zookeeper:
-  #   container_name: Zookeeper-Service
-  #   image: wurstmeister/zookeeper
-  #   ports:
-  #     - '2181:2181'
-  #   networks:
-  #     - node-boilerplate-network
+  zookeeper:
+    container_name: Zookeeper-Service
+    image: wurstmeister/zookeeper
+    ports:
+      - '2181:2181'
+    networks:
+      - node-boilerplate-network
 
-  # kafka:
-  #   container_name: Kafka-Service
-  #   build:
-  #     context: .
-  #     dockerfile: ./docker/kafka.${APP_ENV}.dockerfile
-  #   depends_on:
-  #     - zookeeper
-  #   ports:
-  #     - '9092:9092'
-  #   env_file:
-  #     - ./docker/env/kafka.${APP_ENV}.env
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #   networks:
-  #     - node-boilerplate-network
+  kafka:
+    container_name: Kafka-Service
+    build:
+      context: .
+      dockerfile: ./docker/kafka.${APP_ENV}.dockerfile
+    depends_on:
+      - zookeeper
+    ports:
+      - '9092:9092'
+    env_file:
+      - ./docker/env/kafka.${APP_ENV}.env
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - node-boilerplate-network
 
 volumes:
   pgdata:
