@@ -87,6 +87,41 @@ services:
         aliases:
           - productdb.local
 
+  payment:
+    container_name: Payment-Service
+    build:
+      context: .
+      dockerfile: ./docker/payment.node.${APP_ENV}.dockerfile
+    ports:
+      - '8010:8010'
+    volumes:
+      - .:/var/www/boilerplate
+    depends_on:
+      - paymentdb
+    #   - kafka
+    networks:
+      node-boilerplate-network:
+        ipv4_address: 172.28.0.14
+        aliases:
+          - payment.local
+
+  paymentdb:
+    container_name: paymentdb
+    restart: always
+    image: mysql:latest
+    volumes:
+      - 'mysql2:/var/lib/mysql2'
+      - './config/mysql/sql2.cnf:/etc/mysql/conf.d/sql2.cnf'
+    ports:
+      - '3367:3306'
+    env_file:
+      - ./docker/env/paymentdb.${APP_ENV}.env
+    networks:
+      node-boilerplate-network:
+        ipv4_address: 172.28.0.15
+        aliases:
+          - paymentdb.local
+
   # zookeeper:
   #   container_name: Zookeeper-Service
   #   image: wurstmeister/zookeeper
@@ -114,6 +149,7 @@ services:
 volumes:
   pgdata:
   mysql:
+  mysql2:
 
 networks:
   node-boilerplate-network:
