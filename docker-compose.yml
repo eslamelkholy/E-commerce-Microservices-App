@@ -29,6 +29,7 @@ services:
       - .:/var/www/boilerplate
     depends_on:
       - auth-db
+      - kafka
     networks:
       node-boilerplate-network:
         ipv4_address: 172.28.0.12
@@ -63,7 +64,7 @@ services:
       - ./docker/env/app.${APP_ENV}.env
     depends_on:
       - productdb
-    #   - kafka
+      - kafka
     networks:
       node-boilerplate-network:
         ipv4_address: 172.28.0.10
@@ -98,7 +99,7 @@ services:
       - .:/var/www/boilerplate
     depends_on:
       - paymentdb
-    #   - kafka
+      - kafka
     networks:
       node-boilerplate-network:
         ipv4_address: 172.28.0.14
