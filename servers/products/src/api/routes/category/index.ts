@@ -1,14 +1,15 @@
-import { validateRequest } from '@common-kitchen/common';
 import { Router } from 'express';
+import { CategoryController } from '../../../controller/category';
 import { body } from 'express-validator';
-import { ProductController } from '../../../controller/product';
+import { validateRequest } from '@common-kitchen/common';
+
 const route = Router();
 
-export const productRoute = (app: Router): void => {
-  const productController = new ProductController();
-  app.use('/products', route);
+export const categoryRoute = (app: Router): void => {
+  const categoryController = new CategoryController();
+  app.use('/categories', route);
 
-  route.get('/', productController.get);
+  route.get('/', categoryController.get);
   route.post(
     '/',
     [
@@ -18,10 +19,8 @@ export const productRoute = (app: Router): void => {
         .isLength({ min: 4, max: 60000 })
         .withMessage('Name Min 4 and Max 60000 Characters!'),
       body('status').trim().isLength({ min: 4, max: 200 }).withMessage('Name Min 4 and Max 200 Characters!'),
-      body('price').isInt().withMessage('Price Must be Valid Integer'),
-      body('categoryId').isInt().withMessage('categoryId Must be Valid Integer'),
     ],
     validateRequest,
-    productController.post
+    categoryController.post
   );
 };

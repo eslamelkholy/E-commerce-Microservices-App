@@ -25,8 +25,8 @@ export class Category {
   @OneToMany(() => Product, (product) => product.category)
   products: Product[];
 
-  @Column({ type: 'tinyint', unsigned: true, default: 1 })
-  active: number;
+  @Column({ type: 'varchar', default: 'ACTIVE' })
+  status: string;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: 'string';

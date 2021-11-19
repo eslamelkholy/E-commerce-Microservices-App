@@ -1,23 +1,21 @@
 import { AppResponse } from '@common-kitchen/common';
 import { Request, Response } from 'express';
-import { ProductService } from '../services/Product';
+import { CategoryService } from '../services/Category';
 
-export class ProductController {
-  private productService: ProductService;
+export class CategoryController {
+  private categoryService: CategoryService;
   constructor() {
-    this.productService = new ProductService();
+    this.categoryService = new CategoryService();
   }
 
   get = async (_: Request, res: Response) => {
-    const products = await this.productService.getAll();
+    const products = await this.categoryService.getAll();
 
     return res.status(200).send(new AppResponse(200, products));
   };
 
   post = async (req: Request, res: Response) => {
-    const { categoryId } = req.body;
-
-    const product = await this.productService.create(categoryId, req.body);
+    const product = await this.categoryService.create(req.body);
 
     return res.send(new AppResponse(201, product));
   };
