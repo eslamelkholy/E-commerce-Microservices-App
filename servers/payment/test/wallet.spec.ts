@@ -1,11 +1,10 @@
 import { BadRequestError } from '@common-kitchen/common';
-import { rejects } from 'assert';
 import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import { Connection, ConnectionManager, Repository } from 'typeorm';
 import { WalletRepository } from '../src/repository/WalletRepository';
 import { WalletService } from '../src/services/Wallet';
-import { walletMock } from './mocks/wallet';
+import { walletMock } from './mocks/data/wallet';
 
 chai.use(require('chai-as-promised'));
 
@@ -19,6 +18,7 @@ describe('Wallet Service Test', () => {
     } as unknown as Connection);
     walletService = new WalletService();
     walletRepository = new WalletRepository();
+    walletService.walletRepository = walletRepository;
   });
 
   afterEach(() => {
@@ -33,6 +33,13 @@ describe('Wallet Service Test', () => {
       } catch (error) {
         expect(error).to.be.instanceOf(BadRequestError);
       }
+    });
+
+    it('Create New Wallet if There is Not Wallet Exists', async () => {
+      sinon.stub(walletRepository, 'create').resolves(walletMock[0]);
+      const expected = await walletService.create(walletMock[0]);
+
+      expect(expected).to.equal(walletMock[0]);
     });
   });
 });
