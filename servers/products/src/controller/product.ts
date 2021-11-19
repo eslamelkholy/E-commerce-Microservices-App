@@ -1,5 +1,5 @@
 import { AppResponse } from '@common-kitchen/common';
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { ProductService } from '../services/Product';
 
 export class ProductController {
@@ -14,11 +14,15 @@ export class ProductController {
     return res.status(200).send(new AppResponse(200, products));
   };
 
-  post = async (req: Request, res: Response) => {
-    const { categoryId } = req.body;
+  post = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { categoryId } = req.body;
 
-    const product = await this.productService.create(categoryId, req.body);
+      const product = await this.productService.create(categoryId, req.body);
 
-    return res.send(new AppResponse(201, product));
+      return res.send(new AppResponse(201, product));
+    } catch (err) {
+      next(err);
+    }
   };
 }

@@ -6,18 +6,6 @@ import config from '../config';
 import expressRequestId from 'express-request-id';
 import { AppLogger, errorHandler, NotFoundError, requestLogger } from '@common-kitchen/common';
 // import KafkaConsumer from '../../shared/services/kafka/KafkaConsumer';
-export abstract class CustomError extends Error {
-  abstract statusCode: number;
-  constructor(message: string) {
-    super(message);
-
-    Object.setPrototypeOf(this, CustomError.prototype);
-  }
-  abstract serializeErrors(): {
-    message: string;
-    field?: string;
-  }[];
-}
 
 export default (app: Application) => {
   app.use(cors());
