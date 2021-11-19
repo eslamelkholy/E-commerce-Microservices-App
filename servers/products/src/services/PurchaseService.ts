@@ -1,14 +1,14 @@
 import { BadRequestError } from '@common-kitchen/common';
 import { ProductRepository } from '../repository/ProductRepository';
-import { RequestPurchase } from './Kafka/RequestPurchase';
+import { RequestPurchaseProducer } from './Kafka/RequestPurchaseProducer';
 
 export class PurchaseService {
   public productRepository: ProductRepository;
-  public requestPurchase: RequestPurchase;
+  public requestPurchaseProducer: RequestPurchaseProducer;
 
   constructor() {
     this.productRepository = new ProductRepository();
-    this.requestPurchase = new RequestPurchase();
+    this.requestPurchaseProducer = new RequestPurchaseProducer();
   }
 
   async makePurchase(productId: number, userId: string) {
@@ -17,7 +17,7 @@ export class PurchaseService {
       throw new BadRequestError('Sorry Product Not Found');
     }
 
-    this.requestPurchase.produce({ ...product, userId });
+    this.requestPurchaseProducer.produce({ ...product, userId });
 
     return { message: 'Purchased Request Has Been Made Successfully' };
   }
