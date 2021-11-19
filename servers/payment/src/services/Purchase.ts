@@ -61,7 +61,6 @@ export class PurchaseService {
       throw new BadRequestError('Sorry User Wallet Not Found');
     }
 
-    console.log('New Balance', this.calculateBalanceAfterCancel(userWallet.balance, purchase.price));
     await this.walletRepository.update({
       ...userWallet,
       balance: this.calculateBalanceAfterCancel(userWallet.balance, purchase.price),
