@@ -30,5 +30,5 @@ export default (app: Application) => {
     console.log(err);
   });
 
-  app.listen(config.PORT, () => AppLogger.log(`🛡️  Server listening on port: ${config.PORT} 🛡️`));
+  app.listen(config.PORT, () => AppLogger.log(`🛡️  [Product-Service] listening on port: ${config.PORT} 🛡️`));
 };

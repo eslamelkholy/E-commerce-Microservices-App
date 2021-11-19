@@ -2,4 +2,5 @@ export enum PurchaseStatus {
   FAILED = 'FAILED',
   INPROGRESS = 'INPROGRESS',
   DELIVERED = 'DELIVERED',
+  CANCELED = 'CANCELED',
 }

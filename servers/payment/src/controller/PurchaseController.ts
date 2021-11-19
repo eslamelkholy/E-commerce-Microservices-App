@@ -8,9 +8,11 @@ export class PurchaseController {
     this.purchaseService = new PurchaseService();
   }
 
-  post = async (req: Request, res: Response, next: NextFunction) => {
+  cancelPurchase = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      return res.send(new AppResponse(201, { success: 'Hello World' }));
+      const canceledPurchase = await this.purchaseService.cancelPurchase(req.body.id);
+
+      return res.send(new AppResponse(201, canceledPurchase));
     } catch (err) {
       next(err);
     }

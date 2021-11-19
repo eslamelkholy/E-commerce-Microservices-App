@@ -15,6 +15,10 @@ export class PurchaseRepository {
     return this.repository.findOne(productId);
   }
 
+  findPurchaseById(id: number) {
+    return this.repository.findOne({ where: { id } });
+  }
+
   findCategoryproducts(categoryId: number) {
     return this.repository.find({ where: { category: categoryId } });
   }
@@ -26,5 +30,9 @@ export class PurchaseRepository {
 
   delete(productId: number) {
     return this.repository.delete({ id: productId });
+  }
+
+  update(purchase: Purchase) {
+    return this.repository.save(purchase);
   }
 }

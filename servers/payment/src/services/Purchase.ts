@@ -1,4 +1,5 @@
 import { BadRequestError } from '@common-kitchen/common';
+import { Purchase } from '../entity/Purchase';
 import { PurchaseRepository } from '../repository/PurchaseRepository';
 import { WalletRepository } from '../repository/WalletRepository';
 import { PurchaseStatus } from '../types/Purchase/Purchase';
@@ -36,5 +37,23 @@ export class PurchaseService {
     });
 
     return purchaseRecord;
+  }
+
+  async cancelPurchase(id: number): Promise<Purchase> {
+    const purchase = await this.purchaseRepository.findPurchaseById(id);
+    if (!purchase) {
+      throw new BadRequestError('Sorry Purchase Not Found');
+    }
+
+    if (purchase.status === PurchaseStatus.DELIVERED) {
+      throw new BadRequestError('Sorry Cannot Cancel Delivered Purchase');
+    }
+
+    const updatedPurchase = await this.purchaseRepository.update({
+      ...purchase,
+      status: PurchaseStatus.CANCELED,
+    });
+
+    return updatedPurchase;
   }
 }
