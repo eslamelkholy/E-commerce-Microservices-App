@@ -7,6 +7,7 @@ import sinonChai from 'sinon-chai';
 import { ProductService } from '../src/services/Product';
 import { ProductRepository } from '../src/repository/ProductRepository';
 import { CategoryRepository } from '../src/repository/CategoryRepository';
+import { categoryMock } from './mocks/data/category';
 
 chai.use(require('chai-as-promised'));
 chai.use(sinonChai);
@@ -40,6 +41,26 @@ describe('ProductService Unit Tests', () => {
       const expected = await productService.getAll(1000);
 
       expect(expected).to.equal(productMock);
+    });
+  });
+
+  describe('ProductService - create Functionality', () => {
+    it('Throws Error if Category Not Exists', async () => {
+      sinon.stub(categoryRepository, 'find').resolves(undefined);
+      try {
+        await productService.create(1, productMock[0]);
+      } catch (error) {
+        expect(error).to.be.instanceOf(BadRequestError);
+      }
+    });
+
+    it('Creates New Product if Category Already Exists', async () => {
+      sinon.stub(categoryRepository, 'find').resolves(categoryMock[0]);
+      sinon.stub(productRepository, 'create').resolves(productMock[0]);
+
+      await productService.create(1, productMock[0]);
+
+      expect(productRepository.create).to.have.been.callCount(1);
     });
   });
 });
