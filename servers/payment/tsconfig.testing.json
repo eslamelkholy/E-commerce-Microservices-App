@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "allowJs": true
+  },
+  "include": ["**/*.test.ts"]
+}

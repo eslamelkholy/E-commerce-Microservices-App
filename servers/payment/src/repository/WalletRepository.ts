@@ -2,7 +2,7 @@ import { getRepository, Repository } from 'typeorm';
 import { Wallet } from '../entity/Wallet';
 
 export class WalletRepository {
-  private repository: Repository<Wallet>;
+  public repository: Repository<Wallet>;
 
   constructor() {
     this.repository = getRepository(Wallet);
