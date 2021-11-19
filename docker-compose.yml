@@ -34,6 +34,7 @@ services:
         ipv4_address: 172.28.0.12
         aliases:
           - auth.local
+
   auth-db:
     container_name: auth-db
     build:
@@ -69,6 +70,23 @@ services:
         aliases:
           - product.local
 
+  productdb:
+    container_name: productdb
+    restart: always
+    image: mysql:latest
+    volumes:
+      - 'mysql:/var/lib/mysql'
+      - './config/mysql/sql.cnf:/etc/mysql/conf.d/sql.cnf'
+    ports:
+      - '3366:3306'
+    env_file:
+      - ./docker/env/productdb.${APP_ENV}.env
+    networks:
+      node-boilerplate-network:
+        ipv4_address: 172.28.0.11
+        aliases:
+          - productdb.local
+
   # zookeeper:
   #   container_name: Zookeeper-Service
   #   image: wurstmeister/zookeeper
@@ -92,23 +110,6 @@ services:
   #     - /var/run/docker.sock:/var/run/docker.sock
   #   networks:
   #     - node-boilerplate-network
-
-  productdb:
-    container_name: productdb
-    restart: always
-    image: mysql:latest
-    volumes:
-      - 'mysql:/var/lib/mysql'
-      - './config/mysql/sql.cnf:/etc/mysql/conf.d/sql.cnf'
-    ports:
-      - '3366:3306'
-    env_file:
-      - ./docker/env/productdb.${APP_ENV}.env
-    networks:
-      node-boilerplate-network:
-        ipv4_address: 172.28.0.11
-        aliases:
-          - productdb.local
 
 volumes:
   pgdata:
