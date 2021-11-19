@@ -21,7 +21,7 @@ export class ProductService {
       throw new BadRequestError('Category Not Found!');
     }
 
-    const productRecord = await this.productRepository.create({ ...product, ...category });
+    const productRecord = await this.productRepository.create({ ...product, category: category });
 
     return productRecord;
   }
