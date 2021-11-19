@@ -39,7 +39,6 @@ export class AuthService {
     }
 
     const user = await this.authRepository.createUser(email, password);
-
     const userJwt = JwtService.generateToken(user);
 
     this.registerEvent.produce(user);

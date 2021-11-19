@@ -9,6 +9,7 @@ export class JwtService {
       {
         id: user.id,
         email: user.email,
+        maxAllowedLimit: user.maxAllowedLimit,
       },
       process.env.JWT_KEY!
     );

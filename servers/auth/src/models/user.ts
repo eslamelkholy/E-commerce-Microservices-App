@@ -7,6 +7,7 @@ import { Password } from '../services/password';
 interface UserAttrs {
   email: string;
   password: string;
+  maxAllowedLimit: number;
 }
 
 // An interface that describes the properties
@@ -20,6 +21,7 @@ interface UserModel extends mongoose.Model<UserDoc> {
 export interface UserDoc extends mongoose.Document {
   email: string;
   password: string;
+  maxAllowedLimit: number;
   id?: mongoose.ObjectId;
 }
 
@@ -31,6 +33,10 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
+      required: true,
+    },
+    maxAllowedLimit: {
+      type: Number,
       required: true,
     },
   },
