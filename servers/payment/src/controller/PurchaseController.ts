@@ -10,7 +10,7 @@ export class PurchaseController {
 
   cancelPurchase = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const canceledPurchase = await this.purchaseService.cancelPurchase(req.body.id);
+      const canceledPurchase = await this.purchaseService.cancelPurchase(req.body.id, req.currentUser?.id!);
 
       return res.send(new AppResponse(201, canceledPurchase));
     } catch (err) {

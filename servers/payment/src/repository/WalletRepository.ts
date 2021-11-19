@@ -28,4 +28,8 @@ export class WalletRepository {
   delete(walledId: number) {
     return this.repository.delete({ id: walledId });
   }
+
+  update(wallet: Wallet) {
+    return this.repository.save(wallet);
+  }
 }

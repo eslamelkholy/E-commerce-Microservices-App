@@ -23,8 +23,15 @@ export class PurchaseService {
     }
 
     let status = PurchaseStatus.INPROGRESS;
-    if (userWallet.balance - requestPurchase.price < 0) {
+    const reducedBalance = userWallet.balance - requestPurchase.price;
+
+    if (reducedBalance < 0) {
       status = PurchaseStatus.FAILED;
+    } else {
+      await this.walletRepository.update({
+        ...userWallet,
+        balance: reducedBalance,
+      });
     }
 
     const productId = requestPurchase.id;
@@ -39,7 +46,7 @@ export class PurchaseService {
     return purchaseRecord;
   }
 
-  async cancelPurchase(id: number): Promise<Purchase> {
+  async cancelPurchase(id: number, userId: string): Promise<Purchase> {
     const purchase = await this.purchaseRepository.findPurchaseById(id);
     if (!purchase) {
       throw new BadRequestError('Sorry Purchase Not Found');
@@ -49,11 +56,26 @@ export class PurchaseService {
       throw new BadRequestError('Sorry Cannot Cancel Delivered Purchase');
     }
 
+    const userWallet = await this.walletRepository.find(userId);
+    if (!userWallet) {
+      throw new BadRequestError('Sorry User Wallet Not Found');
+    }
+
+    console.log('New Balance', this.calculateBalanceAfterCancel(userWallet.balance, purchase.price));
+    await this.walletRepository.update({
+      ...userWallet,
+      balance: this.calculateBalanceAfterCancel(userWallet.balance, purchase.price),
+    });
+
     const updatedPurchase = await this.purchaseRepository.update({
       ...purchase,
       status: PurchaseStatus.CANCELED,
     });
 
     return updatedPurchase;
+  }
+
+  calculateBalanceAfterCancel(oldBalance: number, price: number): number {
+    return oldBalance + price;
   }
 }

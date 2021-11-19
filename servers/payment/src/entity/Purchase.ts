@@ -26,7 +26,7 @@ export class Purchase {
   description: string;
 
   @Column({ type: 'integer' })
-  price: string;
+  price: number;
 
   @Column({ name: 'image_url', type: 'varchar', length: 255, nullable: true })
   imageUrl: string;
