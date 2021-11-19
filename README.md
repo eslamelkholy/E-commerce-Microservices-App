@@ -134,4 +134,4 @@ docker-compose up
 cd servers/payment && npm run test
 ```
 
-![testSuit](public/testSuit.png)
+![simpleTest](public/simpleTest.png)
