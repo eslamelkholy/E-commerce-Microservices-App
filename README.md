@@ -35,9 +35,9 @@ Kafka Instance
 - Get Product Less than or Equal User Allowed Limit
 - Query Service to Query all User Orders
 - Database SEED Product/Category If There is Not Record Exists
-- Pagination Package
 - Unit Tests
 - Deploy With Jenkins
+- Pagination Package
 
 # Payment Service
 
