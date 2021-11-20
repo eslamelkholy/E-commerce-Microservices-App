@@ -6,6 +6,7 @@ import { Wallet } from '../entity/Wallet';
 
 export const dbConnect = async () => {
   console.log(config.DB_HOST);
+  console.log(config.DB_USERNAME);
   try {
     await createConnection({
       type: 'mysql',
