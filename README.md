@@ -135,3 +135,4 @@ cd servers/payment && npm run test
 ```
 
 ![simpleTest](public/simpleTest.png)
+![simpleTest2](public/simpleTest2.png)
