@@ -1,7 +1,8 @@
-import { kafkaProducer } from '@common-kitchen/common';
 import { config } from '../../../config';
 import { EventProducer } from './EventProducer';
+import { kafkaProducer } from '../Producer';
 import { KafkaTopics } from './topics';
+
 export class RegisterEvent implements EventProducer {
   produce(payload: any): void {
     kafkaProducer.sendMessage(
