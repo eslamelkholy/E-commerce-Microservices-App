@@ -17,4 +17,14 @@ export class PurchaseController {
       next(err);
     }
   };
+
+  getUserPurchase = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const userPurchases = await this.purchaseService.getUserPurchase(req.currentUser?.id!);
+
+      return res.send(new AppResponse(201, userPurchases));
+    } catch (err) {
+      next(err);
+    }
+  };
 }

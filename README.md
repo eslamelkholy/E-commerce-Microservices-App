@@ -142,3 +142,28 @@ cd servers/payment && npm run test
 
 ![simpleTest](public/simpleTest.png)
 ![simpleTest2](public/simpleTest2.png)
+
+### Steps To Test Api More Faster
+
+After docker-compose up for all three services what you need is the following
+
+- Send Request to **{{AuthUrl}}/users/signup** with a body like this
+  This Request Will Register a new User for you and Creates a wallet with balance 1000000
+
+```
+{
+  "email": "eslam@gmail.com",
+  "password": "password"
+}
+```
+
+- Then Request an Item Purchase by Sending Request to **{{product}}/purchase** with body
+  and headers have the token value already comes from Register api
+
+```
+{
+    "productId": 3
+}
+```
+
+- So Now you have Requested an Product Sucessfully to view your Purchases Send a Get Request to **{{payment}}/purchase** with the token

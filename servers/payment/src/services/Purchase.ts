@@ -74,6 +74,12 @@ export class PurchaseService {
     return updatedPurchase;
   }
 
+  async getUserPurchase(userId: string): Promise<Purchase[]> {
+    const userPurchases = await this.purchaseRepository.getUserPurchases(userId);
+
+    return userPurchases;
+  }
+
   calculateBalanceAfterCancel(oldBalance: number, price: number): number {
     return oldBalance + price;
   }

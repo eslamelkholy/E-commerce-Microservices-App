@@ -20,8 +20,8 @@ export default (app: Application) => {
 
   consumerInitializer.startConsume();
   /// catch 404 and forward to error handler
-  app.all('*', async (req, res) => {
-    throw new NotFoundError();
+  app.all('*', async (req, res, next) => {
+    next(new NotFoundError());
   });
 
   app.use(errorHandler);

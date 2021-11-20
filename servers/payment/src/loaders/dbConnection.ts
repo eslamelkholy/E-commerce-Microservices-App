@@ -16,7 +16,7 @@ export const dbConnect = async () => {
       database: config.DB_NAME,
       entities: [Purchase, Wallet],
       synchronize: true,
-      logging: true,
+      logging: false,
     });
     console.log('DB Connected Successfully 🚀🚀🔥🔥');
   } catch (err) {

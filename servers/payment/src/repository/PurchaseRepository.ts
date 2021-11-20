@@ -35,4 +35,8 @@ export class PurchaseRepository {
   update(purchase: Purchase) {
     return this.repository.save(purchase);
   }
+
+  getUserPurchases(userId: string) {
+    return this.repository.find({ where: { userId } });
+  }
 }
