@@ -1,0 +1,357 @@
+{
+	"info": {
+		"_postman_id": "5a42fd0b-a65c-479e-87f9-48baa19a42a3",
+		"name": "Microservices E-Coomerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Get Product",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOTgwNTc1ZjNlNjVmMDBhNjk1YWJhZiIsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIiwibWF4QWxsb3dlZExpbWl0IjoxMDAwMDAwLCJpYXQiOjE2MzczNTI4MjF9.i8GOYZLrx5ksNfwwKqW4kG7dsbHyeLHLudKhJcXLHWk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{product}}/products",
+							"host": [
+								"{{product}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"categoryId\": 2,\n    \"name\": \"Laptop\",\n    \"description\": \"description Laptop\",\n    \"status\": \"ACTIVE\",\n    \"price\": 100\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{product}}/products",
+							"host": [
+								"{{product}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{product}}/categories",
+							"host": [
+								"{{product}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Categories",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"\",\n    \"description\": \"computing description\",\n    \"status\": \"ACTIVE\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{product}}/categories",
+							"host": [
+								"{{product}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RequestProduct",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOTdiMDkzOGZiOTY1MDAxMmIxMzkzYyIsImVtYWlsIjoiZXNsYW1AZ21haWwuY29tIiwiaWF0IjoxNjM3MzMxMDkyfQ.PaEVb9B7B8XaO1Bu5Knym3bFKJSd_ZYXgSO9lIU56ac",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productId\": 4\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{product}}/purchase",
+							"host": [
+								"{{product}}"
+							],
+							"path": [
+								"purchase"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Signup",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "test",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"test1@gmail.com\",\n  \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{AuthUrl}}/users/signup",
+							"host": [
+								"{{AuthUrl}}"
+							],
+							"path": [
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"testwallet@gmail.com\",\n  \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{AuthUrl}}/users/signin",
+							"host": [
+								"{{AuthUrl}}"
+							],
+							"path": [
+								"users",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"test@test.com\",\n  \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{AuthUrl}}/users/signout",
+							"host": [
+								"{{AuthUrl}}"
+							],
+							"path": [
+								"users",
+								"signout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Current User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOTgwNTc1ZjNlNjVmMDBhNjk1YWJhZiIsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIiwibWF4QWxsb3dlZExpbWl0IjoxMDAwMDAwLCJpYXQiOjE2MzczNTI4MjF9.i8GOYZLrx5ksNfwwKqW4kG7dsbHyeLHLudKhJcXLHWk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{AuthUrl}}/users/currentuser",
+							"host": [
+								"{{AuthUrl}}"
+							],
+							"path": [
+								"users",
+								"currentuser"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payment",
+			"item": [
+				{
+					"name": "Cancel Purchase",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOTdiMDkzOGZiOTY1MDAxMmIxMzkzYyIsImVtYWlsIjoiZXNsYW1AZ21haWwuY29tIiwiaWF0IjoxNjM3MzMxMDkyfQ.PaEVb9B7B8XaO1Bu5Knym3bFKJSd_ZYXgSO9lIU56ac",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{payment}}/purchase-cancel",
+							"host": [
+								"{{payment}}"
+							],
+							"path": [
+								"purchase-cancel"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "AuthUrl",
+			"value": "http://auth.local:3000/api"
+		},
+		{
+			"key": "product",
+			"value": "http://product.local:8000/api/v1"
+		},
+		{
+			"key": "payment",
+			"value": "http://payment.local:8010/api/v1"
+		}
+	]
+}
