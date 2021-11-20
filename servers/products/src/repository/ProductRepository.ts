@@ -31,4 +31,8 @@ export class ProductRepository {
   delete(productId: number) {
     return this.repository.delete({ id: productId });
   }
+
+  findOne() {
+    return this.repository.findOne();
+  }
 }

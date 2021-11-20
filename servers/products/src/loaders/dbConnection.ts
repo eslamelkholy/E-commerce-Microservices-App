@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 import { Category } from '../entity/Category';
 import { Product } from '../entity/Product';
+import { Seeder } from '../seed';
 
 export const dbConnect = async () => {
   try {
@@ -17,6 +18,8 @@ export const dbConnect = async () => {
       logging: false,
     });
     console.log('DB Connected Successfully 🚀🚀🔥🔥');
+    const dbSeeder = new Seeder();
+    dbSeeder.init();
   } catch (err) {
     console.log('DB Connection Error', err);
   }

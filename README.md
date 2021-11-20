@@ -34,7 +34,7 @@ Kafka Instance
 - Cancel Purchase Event Logic
 - Get Product Less than or Equal User Allowed Limit
 - Query Service to Query all User Orders
-- Database SEED With Migration
+- Database SEED Product/Category If There is Not Record Exists
 - Pagination Package
 - Unit Tests
 - Deploy With Jenkins
@@ -104,6 +104,12 @@ Separate Payment Service Logic to Have The Following
 - Using Nestjs Over Express to take a lot of benefits and the most important one is IOC Container so i can have Singleton + Dependency Injection out of the box
 
 # Quick Start
+
+- Set the APP_ENV Environment Vairable
+
+```
+export APP_ENV=development
+```
 
 - Put the Following on your /etc/hosts files
 
